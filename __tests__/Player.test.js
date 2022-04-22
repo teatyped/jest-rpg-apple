@@ -4,7 +4,7 @@ const Potion = require("../lib/Potion");
 
 jest.mock("../lib/Potion.js");
 
-console.log(new Potion());
+console.log(new Potion()); // testing output
 
 test("creates a player object", () => {
   const player = new Player("Dave");
@@ -18,7 +18,7 @@ test("creates a player object", () => {
     expect.arrayContaining([expect.any(Object)])
   );
 
-  console.log(player);
+  console.log(player); // testing output
 });
 
 test("gets player stats as an object", () => {
@@ -46,7 +46,26 @@ test("gets player health value", () => {
   expect(player.getHealth()).toEqual(
     expect.stringContaining(player.health.toString())
   );
+});
 
-  console.log(player);
+test("checks if player is alive or not", () => {
+  const player = new Player("Dave");
+
+  expect(player.isAlive()).toBeTruthy();
+  player.health = 0;
+  expect(player.isAlive()).toBeFalsy();
+});
+
+test('subtracts from players health', () => {
+  const player = new Player('Dave');
+  const oldHealth = player.health;
+
+  player.reduceHealth(5);
+
+  expect(player.health).toBe(oldHealth - 5);
+
+  player.reduceHealth(9999);
+
+  expect(player.health).toBe(0);
 
 });
