@@ -1,4 +1,4 @@
-const { expect } = require('@jest/globals');
+
 const Potion = require('../lib/Potion.js');
 
 // creates a new potion object
